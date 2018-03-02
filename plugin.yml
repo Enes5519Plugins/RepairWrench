@@ -1,0 +1,15 @@
+name: RepairWrench
+version: 1.0
+main: Enes5519\RepairWrench\RepairWrench
+api: 3.0.1
+author: Enes5519
+
+commands:
+  repair:
+    description: Open the repair form
+    usage: /repair
+    permission: repairwrench.use
+
+permissions:
+  repairwrench.use:
+    default: true

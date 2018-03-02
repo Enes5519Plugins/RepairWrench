@@ -1,0 +1,22 @@
+repairable-items:
+  # Format: id: name: '' url or path: ''
+  268:
+    name: 'Tahta Kılıç'
+    price: 50
+    path: 'textures/items/wood_sword'
+  272:
+    name: 'Taş Kılıç'
+    price: 100
+    path: 'textures/items/stone_sword'
+  267:
+    name: 'Demir Kılıç'
+    price: 150
+    path: 'textures/items/iron_sword'
+  283:
+    name: 'Altın Kılıç'
+    price: 150
+    path: 'textures/items/gold_sword'
+  276:
+    name: 'Elmas Kılıç'
+    price: 200
+    path: 'textures/items/diamond_sword'
