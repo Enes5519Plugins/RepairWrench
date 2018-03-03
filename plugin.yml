@@ -6,7 +6,7 @@ author: Enes5519
 
 commands:
   repair:
-    description: Open the repair form
+    description: Shows the repair form
     usage: /repair
     permission: repairwrench.use
 
