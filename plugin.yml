@@ -9,6 +9,8 @@ commands:
     description: Shows the repair form
     usage: /repair
     permission: repairwrench.use
+    overloads:
+      default:
 
 permissions:
   repairwrench.use:
