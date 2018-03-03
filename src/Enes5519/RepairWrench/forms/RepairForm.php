@@ -2,13 +2,13 @@
 
 namespace Enes5519\RepairWrench\forms;
 
+use Enes5519\RepairWrench\lang\Lang;
 use Enes5519\RepairWrench\RepairWrench;
 use pocketmine\form\Form;
 use pocketmine\form\MenuForm;
 use pocketmine\form\MenuOption;
 use pocketmine\item\Item;
 use pocketmine\Player;
-use pocketmine\utils\TextFormat;
 
 class RepairForm extends MenuForm{
 
@@ -16,10 +16,13 @@ class RepairForm extends MenuForm{
     private $api;
     /** @var Item[] */
     protected $itemData = [];
+    /** @var Lang */
+    protected $lang;
 
     public function __construct(Player $player){
         $this->api = RepairWrench::getAPI();
-        parent::__construct("§eRepair Wrench", str_repeat(" ", 15)."§aYour Money: §f".$this->api->getEconomyAPI()->getMonetaryUnit().$this->api->getEconomyAPI()->myMoney($player).str_repeat("\n", 2), $this->getMenuOptions($player));
+        $this->lang = new Lang($player);
+        parent::__construct("§eREPAIR WRENCH", str_repeat(" ", 15).$this->lang->translate("your-money", [$this->api->getEconomyAPI()->getMonetaryUnit().$this->api->getEconomyAPI()->myMoney($player)]).str_repeat("\n", 2), $this->getMenuOptions($player));
     }
 
     private function getMenuOptions(Player $player) : array{
@@ -46,7 +49,7 @@ class RepairForm extends MenuForm{
         $price = $config['price'];
         $myMoney = $this->api->getEconomyAPI()->myMoney($player);
         if($myMoney < $price){
-            $player->sendMessage(TextFormat::RED . "You don't have enough money to repair item. You are missing ".$this->api->getEconomyAPI()->getMonetaryUnit().($price - $myMoney).".");
+            $player->sendMessage($this->lang->translate("lack-money", [$this->api->getEconomyAPI()->getMonetaryUnit().($price - $myMoney)]));
             return null;
         }
 
@@ -57,7 +60,7 @@ class RepairForm extends MenuForm{
         $index = $player->getInventory()->first($item);
         $player->getInventory()->setItem($index, (clone $item)->setDamage(0));
 
-        $player->sendMessage(TextFormat::GREEN . "Item successfully repaired!");
+        $player->sendMessage($this->lang->translate("repaired", [$item->getName()]));
 
         return null;
     }
