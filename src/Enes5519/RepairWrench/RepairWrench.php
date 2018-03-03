@@ -52,9 +52,13 @@ class RepairWrench extends PluginBase{
             return true;
         }
 
-        // TODO : Add check for repairable items exists in inventory
+        $form = new RepairForm($sender);
 
-        $sender->sendForm(new RepairForm($sender));
+        if($form->getOption(0) !== null){
+            $sender->sendForm(new RepairForm($sender));
+        }else{
+            $sender->sendMessage($form->getLang()->translate('no-items-to-repair'));
+        }
 
         return true;
     }

@@ -9,6 +9,7 @@ use pocketmine\form\MenuForm;
 use pocketmine\form\MenuOption;
 use pocketmine\item\Item;
 use pocketmine\Player;
+use pocketmine\utils\TextFormat;
 
 class RepairForm extends MenuForm{
 
@@ -22,7 +23,7 @@ class RepairForm extends MenuForm{
     public function __construct(Player $player){
         $this->api = RepairWrench::getAPI();
         $this->lang = new Lang($player);
-        parent::__construct("§eREPAIR WRENCH", str_repeat(" ", 15).$this->lang->translate("your-money", [$this->api->getEconomyAPI()->getMonetaryUnit().$this->api->getEconomyAPI()->myMoney($player)]).str_repeat("\n", 2), $this->getMenuOptions($player));
+        parent::__construct($this->getRandomColor() . "§lREPAIR WRENCH", str_pad($this->lang->translate("your-money", [$this->api->getEconomyAPI()->getMonetaryUnit().$this->api->getEconomyAPI()->myMoney($player)]), 37, " ", STR_PAD_LEFT).str_repeat("\n", 2), $this->getMenuOptions($player));
     }
 
     private function getMenuOptions(Player $player) : array{
@@ -63,6 +64,15 @@ class RepairForm extends MenuForm{
         $player->sendMessage($this->lang->translate("repaired", [$item->getName()]));
 
         return null;
+    }
+
+    public function getLang(): Lang{
+        return $this->lang;
+    }
+
+    public function getRandomColor() : string{
+        $colors = "0123456789abcdef";
+        return TextFormat::ESCAPE . $colors{mt_rand(0, strlen($colors) - 1)};
     }
 
 }
