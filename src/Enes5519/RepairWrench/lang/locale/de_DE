@@ -1,0 +1,4 @@
+your-money=§aDein Geld: §f{%0}
+lack-money=§cDu hast nicht genügend geld um das Item zu reparieren. Dir fehlt: {%0}.
+repaired=§f{%0} §aerfolgreich repariert!
+no-items-to-repair=§cKein Gegendstand zum reparieren.
