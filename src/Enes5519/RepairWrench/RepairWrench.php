@@ -21,7 +21,7 @@ class RepairWrench extends PluginBase{
     /** @var EconomyAPI */
     private $economyAPI;
 
-    public function __construct(){
+    public function onLoad(){
         self::$api = $this;
     }
 

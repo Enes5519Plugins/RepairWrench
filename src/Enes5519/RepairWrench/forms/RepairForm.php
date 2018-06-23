@@ -34,7 +34,8 @@ class RepairForm extends MenuForm{
         foreach($player->getInventory()->getContents(false) as $item){
             if($item->getDamage() > 0 && isset($config[$item->getId()]) && empty($options[$item->getId()])){
                 $data = $config[$item->getId()];
-                $options[$item->getId()] = new MenuOption("§0".$data['name']." : ".$this->api->getEconomyAPI()->getMonetaryUnit().$data['price'], RepairWrench::createIconFromConfigData($data));
+                $name = empty($data['name']) ? $item->getName() : $data['name'];
+                $options[$item->getId()] = new MenuOption("§0$name : ".$this->api->getEconomyAPI()->getMonetaryUnit().$data['price'], RepairWrench::createIconFromConfigData($data));
                 $this->itemData[] = $item;
             }
         }
